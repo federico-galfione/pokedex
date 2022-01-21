@@ -1,23 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-:host{
+:root{
+    --main-app-color: #3880ff;
+    --main-app-color-shade: #3171e0;
+    --main-app-color-tint: #4c8dff;
     //----- POKEMON TYPES COLORS -----
-    --bug-type-color: #92BC2C;
-    --dark-type-color: #595761;
-    --dragon-type-color: #0C69C8;
-    --electric-type-color: #F2D94E;
-    --fairy-type-color: #EE90E6;
-    --fighting-type-color: #D3425F;
-    --fire-type-color: #FBA54C;
-    --flying-type-color: #A1BBEC;
-    --ghost-type-color: #5F6DBC;
-    --grass-type-color: #5FBD58;
-    --ground-type-color: #DA7C4D;
-    --ice-type-color: #75D0C1;
-    --normal-type-color: #A0A29F;
-    --poison-type-color: #B763CF;
-    --psychic-type-color: #FA8581;
-    --rock-type-color: #C9BB8A;
-    --steel-type-color: #5695A3;
-    --water-type-color: #539DDF;
-
+    $pokemon-types: (
+        "bug": #92BC2C,
+        "dark": #595761,
+        "dragon": #0C69C8,
+        "electric": #F2D94E,
+        "fairy": #EE90E6,
+        "fighting": #D3425F,
+        "fire": #FBA54C,
+        "flying": #A1BBEC,
+        "ghost": #5F6DBC,
+        "grass": #5FBD58,
+        "ground": #DA7C4D,
+        "ice": #75D0C1,
+        "normal": #A0A29F,
+        "poison": #B763CF,
+        "psychic": #FA8581,
+        "rock": #C9BB8A,
+        "steel": #5695A3,
+        "water": #539DDF
+    );
+    @each $type, $color in $pokemon-types {
+        $shade: scale-color($color, $lightness: 30%);
+        $tint: scale-color($color, $lightness: 20%);
+        --#{$type}-type-color: #{$color};
+        --#{$type}-type-color-shade: #{$shade};
+        --#{$type}-type-color-tint: #{$tint};
+    }
+      
 }
