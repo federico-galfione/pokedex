@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+:host{
+    //----- POKEMON TYPES COLORS -----
+    --bug-type-color: #92BC2C;
+    --dark-type-color: #595761;
+    --dragon-type-color: #0C69C8;
+    --electric-type-color: #F2D94E;
+    --fairy-type-color: #EE90E6;
+    --fighting-type-color: #D3425F;
+    --fire-type-color: #FBA54C;
+    --flying-type-color: #A1BBEC;
+    --ghost-type-color: #5F6DBC;
+    --grass-type-color: #5FBD58;
+    --ground-type-color: #DA7C4D;
+    --ice-type-color: #75D0C1;
+    --normal-type-color: #A0A29F;
+    --poison-type-color: #B763CF;
+    --psychic-type-color: #FA8581;
+    --rock-type-color: #C9BB8A;
+    --steel-type-color: #5695A3;
+    --water-type-color: #539DDF;
+
+}
