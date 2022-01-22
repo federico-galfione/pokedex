@@ -13,13 +13,13 @@ export interface Pokemon {
     is_default: boolean;
     order: number;
     weight: number;
-    moves: PokemonMoveResource[];
     sprites: PokemonSprites;
-    stats: PokemonStat[];
     types: {
         slot: number,
         type: PokeapiResource<Type, PokemonTypeName>
-    };
+    }[];
+    moves?: PokemonMoveResource[];
+    stats?: PokemonStat[];
 }
 
 export interface PokemonMoveResource {
@@ -66,6 +66,7 @@ export interface PokemonSprites{
     back_shiny: string;
     back_female: string;
     back_shiny_female: string;
+    other: any;
 }
 
 export interface PokemonStat {
