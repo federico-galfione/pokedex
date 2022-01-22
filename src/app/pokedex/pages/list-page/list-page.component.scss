@@ -1,0 +1,30 @@
+@import 'mixins';
+
+:host{
+    .headbar{
+        padding: 8px 32px;
+    }
+    input {
+        position: fixed;
+        right: 0;
+        top: 16px;
+    }
+    .content{
+        display: grid;
+        grid-template-columns: 1fr;
+        @include respond-to("medium"){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include respond-to("large"){
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include respond-to("x-large"){
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @include respond-to("xx-large"){
+            grid-template-columns: repeat(5, 1fr);
+        }
+        padding: 32px;
+        gap: 32px;
+    }
+}
