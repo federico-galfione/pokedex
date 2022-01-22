@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ListPageComponent } from './pages/list-page/list-page.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ListPageComponent
+  ],
   imports: [
     CommonModule
   ]
