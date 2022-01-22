@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ListPageComponent } from './pages/list-page/list-page.component';
+import { PokedexRoutingModule } from './pokedex-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
     ListPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PokedexRoutingModule
   ]
 })
 export class PokedexModule { }
