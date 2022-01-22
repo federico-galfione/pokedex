@@ -1,0 +1,42 @@
+:host{
+    --main-color: var(--main-app-color);
+    --shade-color: var(--main-app-color-tint);;
+    .container{
+        background: radial-gradient(ellipse at top left, var(--shade-color), var(--main-color));
+        position: relative;
+        width: 100%;
+        height: 96px;
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        .pokemon-img{
+            padding: 16px;
+            position: relative;
+            height: calc(100% - 32px);
+            width: auto;
+        };
+        .title-and-types{
+            .name{
+                padding-top: 16px;
+                padding-right: 16px;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                margin-bottom: 4px;
+            }
+            .types-container{
+                display: flex;
+                gap: 4px;
+            }
+        }
+        .national-number{
+            position: absolute;
+            right: -8px;
+            bottom: -16px;
+            font-size: 56px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.3)
+        }
+    }
+}

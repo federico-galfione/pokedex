@@ -1,0 +1,16 @@
+<div *ngIf="pokemon; else loading" class="container">
+    <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
+    <div class="title-and-types">
+        <div class="name">{{pokemon.name | titlecase}}</div>
+        <div class="types-container">
+            <poke-pokemon-type *ngFor="let type of pokemon.types" class="type-icon-container" [type]="type.type.name">
+            </poke-pokemon-type>
+        </div>
+    </div>
+    <div class="national-number">
+        {{nationalNumber}}
+    </div>
+</div>
+<ng-template #loading>
+    <div class="container no-content"></div>
+</ng-template>

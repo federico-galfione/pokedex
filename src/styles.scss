@@ -1,1 +1,74 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$pokedex-primary: mat.define-palette(mat.$indigo-palette);
+$pokedex-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$pokedex-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$pokedex-theme: mat.define-light-theme((
+  color: (
+    primary: $pokedex-primary,
+    accent: $pokedex-accent,
+    warn: $pokedex-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($pokedex-theme);
+
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --main-app-color: #3880ff;
+    --main-app-color-shade: #3171e0;
+    --main-app-color-tint: #4c8dff;
+    //----- POKEMON TYPES COLORS -----
+    $pokemon-types: (
+        "bug": #92BC2C,
+        "dark": #595761,
+        "dragon": #0C69C8,
+        "electric": #F2D94E,
+        "fairy": #EE90E6,
+        "fighting": #D3425F,
+        "fire": #FBA54C,
+        "flying": #A1BBEC,
+        "ghost": #5F6DBC,
+        "grass": #5FBD58,
+        "ground": #DA7C4D,
+        "ice": #75D0C1,
+        "normal": #A0A29F,
+        "poison": #B763CF,
+        "psychic": #FA8581,
+        "rock": #C9BB8A,
+        "steel": #5695A3,
+        "water": #539DDF
+    );
+    @each $type, $color in $pokemon-types {
+        $shade: scale-color($color, $lightness: 30%);
+        $tint: scale-color($color, $lightness: 20%);
+        --#{$type}-type-color: #{$color};
+        --#{$type}-type-color-shade: #{$shade};
+        --#{$type}-type-color-tint: #{$tint};
+        .#{$type}{
+          background-color: var(--#{$type}-type-color);
+        }
+    }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

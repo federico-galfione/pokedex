@@ -1,0 +1,10 @@
+overrides:
+  - files: '*.html'
+    options:
+      parser: 'html'
+  - files: '*.component.html'
+    options:
+      parser: 'angular'
+endOfLine: auto
+singleQuote: true
+trailingComma: 'es5'
