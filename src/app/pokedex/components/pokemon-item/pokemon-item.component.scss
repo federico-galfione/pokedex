@@ -9,6 +9,11 @@
         border-radius: 16px;
         overflow: hidden;
         display: flex;
+        opacity: 0.7;
+        &.clickable{
+            opacity: 1;
+            cursor: pointer;
+        }   
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
         .pokemon-img{
             padding: 16px;
@@ -37,6 +42,13 @@
             font-size: 56px;
             font-weight: bold;
             color: rgba(255, 255, 255, 0.3)
+        }
+        &.no-content{
+            text-align: center;
+            mat-spinner{
+                position: relative;
+                margin: auto;
+            }
         }
     }
 }

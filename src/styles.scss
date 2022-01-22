@@ -69,6 +69,9 @@ $pokedex-theme: mat.define-light-theme((
           background-color: var(--#{$type}-type-color);
         }
     }
+    .mat-progress-spinner circle, .mat-spinner circle {
+      stroke: #fff;
+    }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

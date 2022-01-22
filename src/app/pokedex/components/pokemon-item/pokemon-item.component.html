@@ -1,4 +1,4 @@
-<div *ngIf="pokemon; else loading" class="container">
+<div *ngIf="pokemon; else loading" [ngClass]="{ container: true, clickable: !!pokemon}" (click)="pokemonClicked()">
     <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
     <div class="title-and-types">
         <div class="name">{{pokemon.name | titlecase}}</div>
@@ -12,5 +12,10 @@
     </div>
 </div>
 <ng-template #loading>
-    <div class="container no-content"></div>
+    <div class="container no-content">
+        <mat-spinner diameter="50"></mat-spinner>
+        <div class="national-number">
+            {{nationalNumber}}
+        </div>
+    </div>
 </ng-template>
