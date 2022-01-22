@@ -65,8 +65,10 @@ $pokedex-theme: mat.define-light-theme((
         --#{$type}-type-color: #{$color};
         --#{$type}-type-color-shade: #{$shade};
         --#{$type}-type-color-tint: #{$tint};
+        .#{$type}{
+          background-color: var(--#{$type}-type-color);
+        }
     }
-      
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
