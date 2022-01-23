@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Pokemon } from '../models/Pokemon';
 import { PokedexService } from './pokedex.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,21 @@ import { PokedexService } from './pokedex.service';
 export class PokemonCacheService extends PokedexService {
   private pokemonCacheByName: {[key: string]: Pokemon} = {};
   private pokemonCacheById: {[key: number]: Pokemon} = {};
+  public wishlist$: Observable<Observable<Pokemon>[]>;
+  public caughtList$: Observable<Observable<Pokemon>[]>;
+
   public get pagination(){
     return super.infoPagination;
   }
 
-  constructor(httpClient: HttpClient) { 
+  constructor(httpClient: HttpClient, private userSvc: UserService) { 
     super(httpClient);
+    this.wishlist$ = this.userSvc.wishlist$.pipe(
+      map(ids => ids.map(id => this.getPokemon(id)))
+    )
+    this.caughtList$ = this.userSvc.caughtList$.pipe(
+      map(ids => ids.map(id => this.getPokemon(id)))
+    )
   }
 
   /**
