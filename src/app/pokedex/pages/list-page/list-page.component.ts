@@ -90,4 +90,10 @@ export class ListPageComponent extends BaseDirective implements OnInit {
   addToCaught(pokemonId: number){
     this.userSvc.isCaught(pokemonId) ? this.userSvc.removeCaughtPokemon(pokemonId) : this.userSvc.addCaughtPokemon(pokemonId);
   }
+
+  checkIfEnter(event){
+    if(event.key === 'Enter') {
+      this.goToDetail(this.searchValue);        
+  }
+  }
 }
