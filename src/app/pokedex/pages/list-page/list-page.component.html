@@ -15,6 +15,9 @@
     </ng-container>
 </div>
 <div class="content" *ngIf="mode === 'wishlist'">
+    <ng-container *ngIf="(pokemonCacheSvc.wishlist$ | async).length === 0">
+        <div>You didn't add any pokemon in your wishlist. Click on <mat-icon>favorite_border</mat-icon> to add one.</div>
+    </ng-container>
     <ng-container *ngFor="let pokemon of pokemonCacheSvc.wishlist$ | async">
         <poke-pokemon-item [pokemon]="pokemon | async" 
         (pokemonClick)="goToDetail($event.toString())"
@@ -24,6 +27,9 @@
     </ng-container>
 </div>
 <div class="content" *ngIf="mode === 'caught'">
+    <ng-container *ngIf="(pokemonCacheSvc.caughtList$ | async).length === 0">
+        <div>You didn't catch any pokemon. Click on <mat-icon>catching_pokemon</mat-icon> to catch one. Gotta Catch 'Em All!</div>
+    </ng-container>
     <ng-container *ngFor="let pokemon of pokemonCacheSvc.caughtList$ | async">
         <poke-pokemon-item [pokemon]="pokemon | async" 
         (pokemonClick)="goToDetail($event.toString())"
@@ -35,7 +41,7 @@
 <div class="footer">
     <div [ngClass]="{'change-mode-container': true, 'padding-bottom': mode !== 'pokedex'}">
         <div class="all" (click)="mode = 'pokedex'"><mat-icon>apps</mat-icon>Show All</div>
-        <div class="wishlist" (click)="mode = 'wishlist'"><mat-icon>favorite</mat-icon>Wishlist</div>
+        <div class="wishlist" (click)="mode = 'wishlist'"><mat-icon>favorite_border</mat-icon>Wishlist</div>
         <div class="caught" (click)="mode = 'caught'"><mat-icon>catching_pokemon</mat-icon>Caught</div>
     </div>
     <mat-paginator

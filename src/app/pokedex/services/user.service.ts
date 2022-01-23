@@ -44,15 +44,14 @@ export class UserService {
   }
 
   private getCaughtPokemonsFromLocalStorage(){
-    this.caughtList.next(localStorage.getItem(this.caughtKey)?.split('-') ?? []);
+    this.caughtList.next(localStorage.getItem(this.caughtKey)?.split('-').filter(x => x !== '') ?? []);
   }
 
   private getWishlistPokemonsFromLocalStorage(){
-    this.wishlist.next(localStorage.getItem(this.wishlistKey)?.split('-') ?? []);
+    this.wishlist.next(localStorage.getItem(this.wishlistKey)?.split('-').filter(x => x !== '') ?? []);
   }
 
   private wishlistFromArrayToLocalStorage(){
-    console.log(this.wishlist);
     localStorage.setItem(this.wishlistKey, this.wishlist.value.join('-'))
   }
 

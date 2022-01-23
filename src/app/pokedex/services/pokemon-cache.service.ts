@@ -77,12 +77,4 @@ export class PokemonCacheService extends PokedexService {
     this.pokemonCacheByName[pokemon.name] = pokemon;
   }
 
-  /**
-   * Add a pokemon to the cache
-   */
-   private resetCache(){
-    this.pokemonCacheById = {};
-    this.pokemonCacheByName = {};
-  }
-
 }
