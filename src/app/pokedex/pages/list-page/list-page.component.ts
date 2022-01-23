@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { BaseDirective } from 'src/app/shared/directives/base.directive';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -27,7 +28,7 @@ export class ListPageComponent extends BaseDirective implements OnInit {
    */
   searchValue: string;
 
-  constructor(public pokemonCacheSvc: PokemonCacheService, private loadingSvc: LoadingService) { 
+  constructor(public pokemonCacheSvc: PokemonCacheService, private loadingSvc: LoadingService, private toastrSvc: ToastrService) { 
     super()
     this.isLoadingPage$ = this.loadingSvc.getLoading(this, ListPageLoadingKeys.getPage)
     this.loadPage()
@@ -46,8 +47,11 @@ export class ListPageComponent extends BaseDirective implements OnInit {
             message: 'I\'m looking for your Pokemon!',
           }
         ).subscribe({
-          next: response => console.log('Pokemon found!'),
-          error: err => console.error('Pokemon not found!')
+          next: response => {
+            console.log('Pokemon found!')
+            this.toastrSvc.success('You\'re gonna be redirect to the detail', 'Pokemon found!');
+          },
+          error: err => this.toastrSvc.error('Write a correct name or id', 'Pokemon not found!')
         })
   }
 
