@@ -13,6 +13,8 @@ import { PokedexService } from './pokedex.service';
  * To improve the application performances I use a cache service to save every information already retrieved.
  * Seems unluckily that a pokemon information is changed during an user session, so this shouldn't interfer
  * with the user experience.
+ * 
+ * This service (pokemonCacheByName and pokemonCacheById in particular) is also the only source of truth for the whole app.
  */
 export class PokemonCacheService extends PokedexService {
   private pokemonCacheByName: {[key: string]: Pokemon} = {};
