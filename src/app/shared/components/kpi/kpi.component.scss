@@ -1,0 +1,24 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .value-container{
+        display: flex;
+        align-items: baseline;
+        .value{
+            font-size: 28px;
+            font-weight: 500;
+        }
+        .measure-unit{
+            font-size: 20px;
+            margin-left: 4px;
+            font-weight: 400;
+        }
+    }
+    .label{
+        font-size: 16px;
+        color: darkgray;
+        font-weight: 500;
+    }
+}
