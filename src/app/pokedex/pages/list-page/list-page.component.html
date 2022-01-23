@@ -7,7 +7,7 @@
 </div>
 <div class="content">
     <ng-container *ngFor="let pokemon of pokemonsPage">
-        <poke-pokemon-item [pokemon]="pokemon | async" ></poke-pokemon-item>
+        <poke-pokemon-item [pokemon]="pokemon | async" (pokemonClick)="goToDetail($event)"></poke-pokemon-item>
     </ng-container>
 </div>
 <div class="footer">

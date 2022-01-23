@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { BaseDirective } from 'src/app/shared/directives/base.directive';
@@ -28,7 +29,11 @@ export class ListPageComponent extends BaseDirective implements OnInit {
    */
   searchValue: string;
 
-  constructor(public pokemonCacheSvc: PokemonCacheService, private loadingSvc: LoadingService, private toastrSvc: ToastrService) { 
+  constructor(public pokemonCacheSvc: PokemonCacheService, 
+    private loadingSvc: LoadingService, 
+    private toastrSvc: ToastrService,
+    private router: Router
+  ) { 
     super()
     this.isLoadingPage$ = this.loadingSvc.getLoading(this, ListPageLoadingKeys.getPage)
     this.loadPage()
@@ -37,7 +42,12 @@ export class ListPageComponent extends BaseDirective implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Save the selected pokemon in the cache and go to the detail page
+   * @param nameOrNumber the name or id of the pokemon as string
+   */
   goToDetail(nameOrNumber: string){
+    console.log('EHY!')
     this.loadingSvc
         .startLoading(
           this,
@@ -48,13 +58,17 @@ export class ListPageComponent extends BaseDirective implements OnInit {
           }
         ).subscribe({
           next: response => {
-            console.log('Pokemon found!')
             this.toastrSvc.success('You\'re gonna be redirect to the detail', 'Pokemon found!');
+            this.router.navigate(['detail', response.id]);
           },
           error: err => this.toastrSvc.error('Write a correct name or id', 'Pokemon not found!')
         })
   }
 
+  /**
+   * Load the n. <pageIndex> page
+   * @param pageIndex The current page
+   */
   loadPage(pageIndex: number = 0){  
     this.loadingSvc
         .startLoading(

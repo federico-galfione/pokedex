@@ -9,8 +9,11 @@ import { Pokemon } from '../../models/Pokemon';
 export class PokemonItemComponent implements OnChanges {
   @Input()
   pokemon: Pokemon | null = null;
+  /**
+   * Emit the pokemon id as a string
+   */
   @Output()
-  pokemonClick: EventEmitter<Pokemon> = new EventEmitter<Pokemon>()
+  pokemonClick: EventEmitter<string> = new EventEmitter<string>()
 
   get nationalNumber(){
     let num = this.pokemon?.id.toString();
@@ -32,6 +35,6 @@ export class PokemonItemComponent implements OnChanges {
   }
 
   pokemonClicked(){
-    this.pokemonClick.emit(this.pokemon as Pokemon);
+    this.pokemonClick.emit(this.pokemon.id.toString());
   }
 }

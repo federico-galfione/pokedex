@@ -6,6 +6,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonTypeComponent } from './components/pokemon-type-icon/pokemon-type.component';
+import { DetailPageComponent } from './pages/detail/detail-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { PokedexRoutingModule } from './pokedex-routing.module';
 
@@ -14,7 +15,8 @@ import { PokedexRoutingModule } from './pokedex-routing.module';
   declarations: [
     ListPageComponent,
     PokemonItemComponent,
-    PokemonTypeComponent
+    PokemonTypeComponent,
+    DetailPageComponent
   ],
   imports: [
     CommonModule,
