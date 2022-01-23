@@ -17,8 +17,8 @@
         </div>
         <div class="kpi-container">
             <poke-kpi [value]="pokemon.id | nationalNum" label="Number"></poke-kpi>
-            <poke-kpi [value]="pokemon.height" label="Height" measureUnit="M"></poke-kpi>
-            <poke-kpi [value]="pokemon.weight" label="Weight" measureUnit="KG"></poke-kpi>
+            <poke-kpi [value]="pokemon.height / 10" label="Height" measureUnit="M"></poke-kpi>
+            <poke-kpi [value]="pokemon.weight / 10" label="Weight" measureUnit="KG"></poke-kpi>
         </div>
     </div>
     <div class="other-details">
