@@ -5,6 +5,7 @@ import { BaseDirective } from 'src/app/shared/directives';
 import { LoadingService } from 'src/app/shared/services';
 import { Pokemon, PokemonMoveResource } from '../../models/Pokemon';
 import { PokemonCacheService } from '../../services/pokemon-cache.service';
+import { UserService } from '../../services/user.service';
 const DetailPageLoadingKeys = {
   getPokemon: 'GET_POKEMON'
 }
@@ -23,11 +24,21 @@ export class DetailPageComponent extends BaseDirective implements OnInit {
     });
   }
 
+  get isInWishlist(){
+    return this.userSvc.isInWishlist(this.pokemon.id);
+  }
+
+  get isCaught(){
+    return this.userSvc.isCaught(this.pokemon.id);
+  }
+
+
   constructor(private route: ActivatedRoute, 
     private pokemonCacheSvc: PokemonCacheService, 
     private loadingSvc: LoadingService, 
     private elementRef: ElementRef, 
     private toastrSvc: ToastrService,
+    private userSvc: UserService,
     private router: Router
   ) { 
     super();
@@ -70,4 +81,17 @@ export class DetailPageComponent extends BaseDirective implements OnInit {
       console.log(pokemon);
     }
   }
+
+  addToWishlist(){
+    this.userSvc.isInWishlist(this.pokemon.id) ? this.userSvc.removeWishlistPokemon(this.pokemon.id) : this.userSvc.addWishlistPokemon(this.pokemon.id);
+  }
+
+  addToCaught(){
+    this.userSvc.isCaught(this.pokemon.id) ? this.userSvc.removeCaughtPokemon(this.pokemon.id) : this.userSvc.addCaughtPokemon(this.pokemon.id);
+  }
+
+  goToPokedex(){
+    this.router.navigate(['']);
+  }
+  
 }

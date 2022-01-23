@@ -84,7 +84,6 @@ export class ListPageComponent extends BaseDirective implements OnInit {
   }
 
   addToWishlist(pokemonId: number){
-    console.log(pokemonId);
     this.userSvc.isInWishlist(pokemonId) ? this.userSvc.removeWishlistPokemon(pokemonId) : this.userSvc.addWishlistPokemon(pokemonId);
   }
 

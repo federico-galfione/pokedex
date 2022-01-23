@@ -32,6 +32,43 @@
                 height: 176px;
                 width: auto;
             }
+            .background-pokeball{
+                position: absolute;
+                bottom: 266px;
+                left: -40px;
+                font-size: 400px;
+                color: rgba(255, 255, 255, 0.1);
+            }
+            .back-button{
+                position: absolute;
+                top: 16px;
+                left: 16px;
+                color: white;
+                cursor: pointer;
+            }
+            .action-buttons{
+                position: absolute;
+                display: flex;
+                gap: 4px;
+                color: white;
+                top: 16px;
+                right: 16px;
+                z-index: 50;
+                mat-icon {
+                    &.wishlist-button{
+                        background-color: var(--fighting-type-color);
+                    }
+                    &.caught-button{
+                        background-color: var(--main-app-color);
+                    }
+                    &.not-included{
+                        background-color: darkgray;
+                    }
+                    border-radius: 8px;
+                    padding: 4px;
+                    cursor: pointer;
+                }
+            }
         }
         .title{
             font-size: 32px;

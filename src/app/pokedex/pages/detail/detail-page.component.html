@@ -2,6 +2,12 @@
 <ng-container *ngIf="pokemon">
     <div class="pokemon-general">
         <div class="image-container">
+            <mat-icon class="background-pokeball">catching_pokemon</mat-icon>
+            <mat-icon class="back-button" (click)="goToPokedex()">arrow_back</mat-icon>
+            <div class="action-buttons" *ngIf="pokemon">
+                <mat-icon [ngClass]="{ 'wishlist-button': true, 'not-included': !isInWishlist}" (click)="addToWishlist()">favorite_border</mat-icon>
+                <mat-icon [ngClass]="{ 'caught-button': true, 'not-included': !isCaught}" (click)="addToCaught()">catching_pokemon</mat-icon>
+            </div>
             <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
         </div>
         <div class="title">{{pokemon.name | titlecase}}</div>
