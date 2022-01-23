@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PokeapiGenericPage } from '../models/PokeapiGenericPage';
@@ -38,7 +39,13 @@ export class PokedexService {
       ));
   }
 
-  protected getPokemonFromApi(numberOrName: string){
+  /**
+   * Call the api and gets the pokemon rapresented bt numberOrName
+   * 
+   * @param numberOrName the id of the pokemon (name or number)
+   * @returns Returns a specific pokemon
+   */
+  protected getPokemonFromApi(numberOrName: string): Observable<Pokemon>{
     return this.http.get<Pokemon>(`${environment.baseApiUrl}/pokemon/${numberOrName}`)
       .pipe(
         map(result => {
