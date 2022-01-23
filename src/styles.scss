@@ -75,6 +75,13 @@ $pokedex-theme: mat.define-light-theme((
     .toast-bottom-right{
       border-radius: 16px;
     }
+    --current-progress-bar-color: var(--bug-type-color);
+    mat-progress-bar .mat-progress-bar-buffer {
+      background: #f5f5f5;
+    }
+    .mat-progress-bar-fill::after {
+      background: var(--current-progress-bar-color);
+  }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
