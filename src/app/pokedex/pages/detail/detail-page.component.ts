@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BaseDirective } from 'src/app/shared/directives';
 import { LoadingService } from 'src/app/shared/services';
-import { Pokemon } from '../../models/Pokemon';
+import { Pokemon, PokemonMoveResource } from '../../models/Pokemon';
 import { PokemonCacheService } from '../../services/pokemon-cache.service';
 const DetailPageLoadingKeys = {
   getPokemon: 'GET_POKEMON'
@@ -16,6 +16,12 @@ const DetailPageLoadingKeys = {
 })
 export class DetailPageComponent extends BaseDirective implements OnInit {
   pokemon: Pokemon;
+  get slicedMoves(): PokemonMoveResource[]{
+    return this.pokemon?.moves.slice(0, 5).map(x => {
+      x.move.name = x.move.name.split('-').join(' ');
+      return x;
+    });
+  }
 
   constructor(private route: ActivatedRoute, 
     private pokemonCacheSvc: PokemonCacheService, 

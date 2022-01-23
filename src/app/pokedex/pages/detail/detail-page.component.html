@@ -16,5 +16,20 @@
         </div>
     </div>
     <div class="other-details">
+        <div class="base-stats">
+            <div class="section-title">Base Stats</div>
+            <div class="stat" *ngFor="let stat of pokemon.stats">
+                <poke-pokemon-stat [stat]="stat"></poke-pokemon-stat>
+            </div>
+        </div>
+        <div class="moves">
+            <div class="section-title">Moves</div>
+            <div class="moves-container">
+                <div class="move" *ngFor="let move of slicedMoves">
+                    {{move.move.name | titlecase}}
+                </div>
+                <div class="other-moves">...and {{pokemon.moves.length - 5}} others</div>
+            </div>
+        </div>
     </div>
 </ng-container>

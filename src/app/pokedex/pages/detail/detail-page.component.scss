@@ -13,15 +13,15 @@
     .pokemon-general{
         position: relative;
         width: 100%;
-        height: 304px;
+        padding-bottom: 32px;
         .image-container{
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            height: 176px;
             padding: 64px;
-            height: calc(100% - 128px);
             background: radial-gradient(ellipse at top left, var(--first-type-color), var(--second-type-color));
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
             border-radius: 0 0 50% 50%;
@@ -29,6 +29,8 @@
                 position: relative;
                 max-width:100%;
                 max-height:100%;
+                height: 176px;
+                width: auto;
             }
         }
         .title{
@@ -58,5 +60,39 @@
     }
     .other-details{
         background-color: #f5f5f5;
+        padding: 32px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        @include respond-to("large"){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include respond-to("x-large"){
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .section-title{
+            font-weight: 600;
+        }
+        .base-stats{
+            poke-pokemon-stat{
+                --color: var(--second-type-color);
+            }
+        }
+        .moves{
+            .move{
+                --color: var(--main-app-color);
+                display: flex;
+                align-items: center;
+                padding: 16px;
+                background-color: white;
+                margin-top: 16px;
+                border-radius: 8px;
+            }
+            .other-moves{
+                margin-top: 8px;
+                font-weight: 500;
+                text-align: right;
+            }
+        }
     }
 }
