@@ -1,1 +1,16 @@
-<p>{{pokemon?.name}}</p>
+
+<ng-container *ngIf="pokemon">
+    <div class="pokemon-general">
+        <div class="image-container">
+            <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
+        </div>
+        <div class="title">{{pokemon.name | titlecase}}</div>
+        <div class="types">
+            <poke-pokemon-type *ngFor="let type of pokemon.types" mode="text" class="type-icon-container" [type]="type.type.name">
+            </poke-pokemon-type>
+        </div>
+        <div class="kpi-container"></div>
+    </div>
+    <div class="other-details">
+    </div>
+</ng-container>

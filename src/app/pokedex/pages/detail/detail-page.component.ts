@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BaseDirective } from 'src/app/shared/directives';
 import { LoadingService } from 'src/app/shared/services';
 import { Pokemon } from '../../models/Pokemon';
@@ -16,7 +17,13 @@ const DetailPageLoadingKeys = {
 export class DetailPageComponent extends BaseDirective implements OnInit {
   pokemon: Pokemon;
 
-  constructor(private route: ActivatedRoute, private pokemonCacheSvc: PokemonCacheService, private loadingSvc: LoadingService) { 
+  constructor(private route: ActivatedRoute, 
+    private pokemonCacheSvc: PokemonCacheService, 
+    private loadingSvc: LoadingService, 
+    private elementRef: ElementRef, 
+    private toastrSvc: ToastrService,
+    private router: Router
+  ) { 
     super();
   }
 
@@ -34,6 +41,22 @@ export class DetailPageComponent extends BaseDirective implements OnInit {
        {
          message: 'I\'m getting your Pokemon!',
        }
-     ).subscribe(result => this.pokemon = result);
+     ).subscribe({
+       next: result => {
+        this.pokemon = result
+        this.setupColors(result);
+       },
+       error: error => {
+        this.toastrSvc.error('You\'re gonna be redirect to the pokedex', 'Pokemon not found!');
+        this.router.navigate(['']);
+       }
+     });
+  }
+
+  setupColors(pokemon: Pokemon){
+    if(pokemon){
+      this.elementRef.nativeElement.style.setProperty('--second-type-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-tint`))
+      this.elementRef.nativeElement.style.setProperty('--first-type-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-shade`))
+    }
   }
 }
