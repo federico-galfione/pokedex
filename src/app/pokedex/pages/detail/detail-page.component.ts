@@ -53,10 +53,15 @@ export class DetailPageComponent extends BaseDirective implements OnInit {
      });
   }
 
+  /**
+   * Change the background colors behind the pokemon image
+   * @param pokemon the current pokemon
+   */
   setupColors(pokemon: Pokemon){
     if(pokemon){
       this.elementRef.nativeElement.style.setProperty('--second-type-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-tint`))
       this.elementRef.nativeElement.style.setProperty('--first-type-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-shade`))
+      console.log(pokemon);
     }
   }
 }

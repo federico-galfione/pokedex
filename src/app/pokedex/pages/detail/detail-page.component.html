@@ -9,7 +9,11 @@
             <poke-pokemon-type *ngFor="let type of pokemon.types" mode="text" class="type-icon-container" [type]="type.type.name">
             </poke-pokemon-type>
         </div>
-        <div class="kpi-container"></div>
+        <div class="kpi-container">
+            <poke-kpi [value]="pokemon.id | nationalNum" label="Number"></poke-kpi>
+            <poke-kpi [value]="pokemon.height" label="Height" measureUnit="M"></poke-kpi>
+            <poke-kpi [value]="pokemon.weight" label="Weight" measureUnit="KG"></poke-kpi>
+        </div>
     </div>
     <div class="other-details">
     </div>
