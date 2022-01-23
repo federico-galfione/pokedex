@@ -48,6 +48,7 @@
         *ngIf="mode === 'pokedex'"
         [length]="pokemonCacheSvc.pagination?.count"
         [pageSize]="pokemonCacheSvc.pagination?.itemsPerPage"
+        [pageIndex]="pokemonCacheSvc.pagination?.currentPage"
         [disabled]="isLoadingPage$ | async"
         (page)="loadPage($event.pageIndex)"
     ></mat-paginator>

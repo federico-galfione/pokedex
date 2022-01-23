@@ -16,7 +16,7 @@ const ELEMENTS_PER_PAGE = 20;
 export class PokedexService {
 
   //The next page to be called
-  private _infoPagination: { count: number, itemsPerPage: number } | null = null;
+  private _infoPagination: { count: number, itemsPerPage: number, currentPage: number } | null = null;
   protected get infoPagination(){
     return this._infoPagination;
   }
@@ -35,7 +35,7 @@ export class PokedexService {
     console.log(environment.baseApiUrl);
     return this.http.get<PokeapiGenericPage<Pokemon>>(`${environment.baseApiUrl}/pokemon?offset=${pageNumber * ELEMENTS_PER_PAGE}&limit=20/`)
       .pipe(tap(
-        result => this.infoPagination = { count: result.count, itemsPerPage: ELEMENTS_PER_PAGE }
+        result => this.infoPagination = { count: result.count, itemsPerPage: ELEMENTS_PER_PAGE, currentPage: pageNumber }
       ));
   }
 
