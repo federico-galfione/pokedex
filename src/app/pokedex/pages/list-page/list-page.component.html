@@ -1,14 +1,48 @@
 <div class="headbar">
-    <h1>Pokedéx</h1>
+    <h1>{{mode | titlecase}}</h1>
     <div class="search-container">
-        <input/>
+        <div class="label"><mat-icon>search</mat-icon>Search by name or id</div>
+        <div class="search-form"><input type="text" [(ngModel)]="searchValue"/><mat-icon (click)="goToDetail(searchValue)">arrow_forward</mat-icon></div>
     </div>
 </div>
-<div class="content">
+<div class="content" *ngIf="mode === 'pokedex'">
     <ng-container *ngFor="let pokemon of pokemonsPage">
-        <poke-pokemon-item [pokemon]="pokemon | async"></poke-pokemon-item>
+        <poke-pokemon-item [pokemon]="pokemon | async" 
+        (pokemonClick)="goToDetail($event.toString())"
+        (addWishlistClick)="addToWishlist($event)"
+        (addCaughtClick)="addToCaught($event)"
+        ></poke-pokemon-item>
+    </ng-container>
+</div>
+<div class="content" *ngIf="mode === 'wishlist'">
+    <ng-container *ngFor="let pokemon of pokemonCacheSvc.wishlist$ | async">
+        <poke-pokemon-item [pokemon]="pokemon | async" 
+        (pokemonClick)="goToDetail($event.toString())"
+        (addWishlistClick)="addToWishlist($event)"
+        (addCaughtClick)="addToCaught($event)"
+        ></poke-pokemon-item>
+    </ng-container>
+</div>
+<div class="content" *ngIf="mode === 'caught'">
+    <ng-container *ngFor="let pokemon of pokemonCacheSvc.caughtList$ | async">
+        <poke-pokemon-item [pokemon]="pokemon | async" 
+        (pokemonClick)="goToDetail($event.toString())"
+        (addWishlistClick)="addToWishlist($event)"
+        (addCaughtClick)="addToCaught($event)"
+        ></poke-pokemon-item>
     </ng-container>
 </div>
 <div class="footer">
-    
+    <div [ngClass]="{'change-mode-container': true, 'padding-bottom': mode !== 'pokedex'}">
+        <div class="all" (click)="mode = 'pokedex'"><mat-icon>apps</mat-icon>Show All</div>
+        <div class="wishlist" (click)="mode = 'wishlist'"><mat-icon>favorite</mat-icon>Wishlist</div>
+        <div class="caught" (click)="mode = 'caught'"><mat-icon>catching_pokemon</mat-icon>Caught</div>
+    </div>
+    <mat-paginator
+        *ngIf="mode === 'pokedex'"
+        [length]="pokemonCacheSvc.pagination?.count"
+        [pageSize]="pokemonCacheSvc.pagination?.itemsPerPage"
+        [disabled]="isLoadingPage$ | async"
+        (page)="loadPage($event.pageIndex)"
+    ></mat-paginator>
 </div>

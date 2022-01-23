@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Pokemon } from '../models/Pokemon';
 import { PokedexService } from './pokedex.service';
-type NameOrNumber = {name: string, number?: never} | {name?: never, number: string};
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,27 @@ type NameOrNumber = {name: string, number?: never} | {name?: never, number: stri
  * To improve the application performances I use a cache service to save every information already retrieved.
  * Seems unluckily that a pokemon information is changed during an user session, so this shouldn't interfer
  * with the user experience.
+ * 
+ * This service (pokemonCacheByName and pokemonCacheById in particular) is also the only source of truth for the whole app.
  */
 export class PokemonCacheService extends PokedexService {
   private pokemonCacheByName: {[key: string]: Pokemon} = {};
   private pokemonCacheById: {[key: number]: Pokemon} = {};
+  public wishlist$: Observable<Observable<Pokemon>[]>;
+  public caughtList$: Observable<Observable<Pokemon>[]>;
 
-  constructor(httpClient: HttpClient) { 
+  public get pagination(){
+    return super.infoPagination;
+  }
+
+  constructor(httpClient: HttpClient, private userSvc: UserService) { 
     super(httpClient);
+    this.wishlist$ = this.userSvc.wishlist$.pipe(
+      map(ids => ids.map(id => this.getPokemon(id)))
+    )
+    this.caughtList$ = this.userSvc.caughtList$.pipe(
+      map(ids => ids.map(id => this.getPokemon(id)))
+    )
   }
 
   /**
@@ -29,9 +43,9 @@ export class PokemonCacheService extends PokedexService {
    * 
    * @returns return a an observable of lists of observables of pokemon
    */
-  public getPokemonPage(): Observable<Array<Observable<Pokemon>>> {
-      return super.getPokemonPageFromApi().pipe(
-        map(page => page.results.map(info => this.getPokemon({ name: info.name })))
+  public getPokemonPage(pageNumber: number = 0): Observable<Array<Observable<Pokemon>>> {
+      return super.getPokemonPageFromApi(pageNumber).pipe(
+        map(page => page.results.map(info => this.getPokemon(info.name)))
       )
   }
 
@@ -41,9 +55,10 @@ export class PokemonCacheService extends PokedexService {
    * @param nameOrNumber The name or the number of the pokemon
    * @returns an observable of a Pokemon
    */
-  public getPokemon(nameOrNumber: NameOrNumber): Observable<Pokemon>{
-    const rightCache = (nameOrNumber.name) ? this.pokemonCacheByName : this.pokemonCacheById;
-    const key = nameOrNumber.name ?? nameOrNumber.number;
+  public getPokemon(nameOrNumber: string): Observable<Pokemon>{
+    nameOrNumber = nameOrNumber.trim().toLowerCase();
+    const rightCache = isNaN(+nameOrNumber) ? this.pokemonCacheByName : this.pokemonCacheById;
+    const key = nameOrNumber;
     return rightCache[key] 
       ? of(rightCache[key]) 
       : this.getPokemonFromApi(key)

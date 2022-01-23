@@ -1,6 +1,30 @@
 :host{
     --main-color: var(--main-app-color);
-    --shade-color: var(--main-app-color-tint);;
+    --shade-color: var(--main-app-color-tint);
+    position: relative;
+    .action-buttons{
+        position: absolute;
+        display: flex;
+        gap: 4px;
+        color: white;
+        top: -4px;
+        right: -4px;
+        z-index: 50;
+        mat-icon {
+            &.wishlist-button{
+                background-color: var(--fighting-type-color);
+            }
+            &.caught-button{
+                background-color: var(--main-app-color);
+            }
+            &.not-included{
+                background-color: darkgray;
+            }
+            border-radius: 8px;
+            padding: 4px;
+            cursor: pointer;
+        }
+    }
     .container{
         background: radial-gradient(ellipse at top left, var(--shade-color), var(--main-color));
         position: relative;
@@ -9,6 +33,11 @@
         border-radius: 16px;
         overflow: hidden;
         display: flex;
+        opacity: 0.7;
+        &.clickable{
+            opacity: 1;
+            cursor: pointer;
+        }   
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
         .pokemon-img{
             padding: 16px;
@@ -17,12 +46,17 @@
             width: auto;
         };
         .title-and-types{
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            padding: 16px;
             .name{
-                padding-top: 16px;
-                padding-right: 16px;
                 font-size: 24px;
                 font-weight: bold;
                 color: white;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 margin-bottom: 4px;
             }
             .types-container{
@@ -37,6 +71,13 @@
             font-size: 56px;
             font-weight: bold;
             color: rgba(255, 255, 255, 0.3)
+        }
+        &.no-content{
+            text-align: center;
+            mat-spinner{
+                position: relative;
+                margin: auto;
+            }
         }
     }
 }

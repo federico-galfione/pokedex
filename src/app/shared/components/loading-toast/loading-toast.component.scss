@@ -1,0 +1,31 @@
+:host {
+  z-index: 1000;
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background: linear-gradient(45deg, var(--main-app-color-shade), var(--main-app-color-tint));
+  color: white;
+  .toast-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .text {
+      flex: 1;
+      font-size: 0.75rem;
+      padding-left: 32px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    div[loading-icon] {
+      padding-right: 32px;
+      transform: scale(0.6);
+    }
+  }
+}

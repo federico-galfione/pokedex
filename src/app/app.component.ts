@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { LoadingDirective } from './shared/directives';
+import { LoadingService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pokedex';
+  @ViewChild(LoadingDirective, {static: true}) loadingHost!: LoadingDirective;
+
+  constructor(private loadingSvc: LoadingService) {}
+
+  ngAfterViewInit(){
+    this.loadingSvc.loadingHost = this.loadingHost.viewContainerRef;
+  }
 }

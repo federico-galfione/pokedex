@@ -1,0 +1,35 @@
+
+<ng-container *ngIf="pokemon">
+    <div class="pokemon-general">
+        <div class="image-container">
+            <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
+        </div>
+        <div class="title">{{pokemon.name | titlecase}}</div>
+        <div class="types">
+            <poke-pokemon-type *ngFor="let type of pokemon.types" mode="text" class="type-icon-container" [type]="type.type.name">
+            </poke-pokemon-type>
+        </div>
+        <div class="kpi-container">
+            <poke-kpi [value]="pokemon.id | nationalNum" label="Number"></poke-kpi>
+            <poke-kpi [value]="pokemon.height" label="Height" measureUnit="M"></poke-kpi>
+            <poke-kpi [value]="pokemon.weight" label="Weight" measureUnit="KG"></poke-kpi>
+        </div>
+    </div>
+    <div class="other-details">
+        <div class="base-stats">
+            <div class="section-title">Base Stats</div>
+            <div class="stat" *ngFor="let stat of pokemon.stats">
+                <poke-pokemon-stat [stat]="stat"></poke-pokemon-stat>
+            </div>
+        </div>
+        <div class="moves">
+            <div class="section-title">Moves</div>
+            <div class="moves-container">
+                <div class="move" *ngFor="let move of slicedMoves">
+                    {{move.move.name | titlecase}}
+                </div>
+                <div class="other-moves">...and {{pokemon.moves.length - 5}} others</div>
+            </div>
+        </div>
+    </div>
+</ng-container>

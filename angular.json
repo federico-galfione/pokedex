@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/_mixins.scss"
+              "src/_mixins.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
@@ -104,10 +105,14 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/_mixins.scss"
+              "src/_mixins.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

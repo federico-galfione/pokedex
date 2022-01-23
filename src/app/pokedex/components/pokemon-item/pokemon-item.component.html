@@ -1,5 +1,9 @@
-<div *ngIf="pokemon; else loading" class="container">
-    <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
+<div class="action-buttons" *ngIf="pokemon">
+    <mat-icon [ngClass]="{ 'wishlist-button': true, 'not-included': !isInWishlist}" (click)="addWishlist()">favorite_border</mat-icon>
+    <mat-icon [ngClass]="{ 'caught-button': true, 'not-included': !isCaught}" (click)="addCaught()">catching_pokemon</mat-icon>
+</div>
+<div *ngIf="pokemon; else loading" [ngClass]="{ container: true, clickable: !!pokemon}" (click)="pokemonClicked()">
+    <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default" (error)="imgNotFound()">
     <div class="title-and-types">
         <div class="name">{{pokemon.name | titlecase}}</div>
         <div class="types-container">
@@ -8,9 +12,12 @@
         </div>
     </div>
     <div class="national-number">
-        {{nationalNumber}}
+        {{pokemon?.id | nationalNum}}
     </div>
 </div>
 <ng-template #loading>
-    <div class="container no-content"></div>
+    <div class="container no-content">
+        <mat-spinner diameter="50"></mat-spinner>
+        <div class="national-number">#000</div>
+    </div>
 </ng-template>
