@@ -80,7 +80,7 @@ export class ListPageComponent extends BaseDirective implements OnInit {
           {
             message: 'I\'m getting new Pokemon!',
           }
-        ).subscribe(x => this.pokemonsPage = x);
+        ).subscribe(x => this.pokemonsPage = x );
   }
 
   addToWishlist(pokemonId: number){

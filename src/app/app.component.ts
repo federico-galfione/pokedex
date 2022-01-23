@@ -13,6 +13,6 @@ export class AppComponent {
   constructor(private loadingSvc: LoadingService) {}
 
   ngAfterViewInit(){
-    this.loadingSvc.loadingHost = this.loadingHost.viewContainerRef;
+    this.loadingSvc.loadingHost = this.loadingHost?.viewContainerRef;
   }
 }

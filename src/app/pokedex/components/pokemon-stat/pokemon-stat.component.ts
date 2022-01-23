@@ -23,8 +23,8 @@ export class PokemonStatComponent implements AfterViewInit {
   }
 
   get value(){
-    if(this.stat.base_stat){
-      return this.stat.base_stat / 2;
+    if(this.stat?.base_stat){
+      return this.stat?.base_stat / 2;
     }
     return 20;
   }
