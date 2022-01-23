@@ -33,7 +33,7 @@ export class PokedexService {
    */
   protected getPokemonPageFromApi(pageNumber: number){
     console.log(environment.baseApiUrl);
-    return this.http.get<PokeapiGenericPage<Pokemon>>(`${environment.baseApiUrl}/pokemon?offset=${pageNumber * ELEMENTS_PER_PAGE}&limit=20`)
+    return this.http.get<PokeapiGenericPage<Pokemon>>(`${environment.baseApiUrl}/pokemon?offset=${pageNumber * ELEMENTS_PER_PAGE}&limit=20/`)
       .pipe(tap(
         result => this.infoPagination = { count: result.count, itemsPerPage: ELEMENTS_PER_PAGE }
       ));
@@ -46,7 +46,7 @@ export class PokedexService {
    * @returns Returns a specific pokemon
    */
   protected getPokemonFromApi(numberOrName: string): Observable<Pokemon>{
-    return this.http.get<Pokemon>(`${environment.baseApiUrl}/pokemon/${numberOrName}`)
+    return this.http.get<Pokemon>(`${environment.baseApiUrl}/pokemon/${numberOrName}/`)
       .pipe(
         map(result => {
           return  {
