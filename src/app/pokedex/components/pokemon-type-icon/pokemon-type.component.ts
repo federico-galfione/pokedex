@@ -1,9 +1,10 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'poke-pokemon-type',
   templateUrl: './pokemon-type.component.html',
-  styleUrls: ['./pokemon-type.component.scss']
+  styleUrls: ['./pokemon-type.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PokemonTypeComponent {
   @Input()

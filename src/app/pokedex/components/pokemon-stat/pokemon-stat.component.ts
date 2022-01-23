@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
 import { PokemonStat } from '../../models/Pokemon';
 
 @Component({
   selector: 'poke-pokemon-stat',
   templateUrl: './pokemon-stat.component.html',
-  styleUrls: ['./pokemon-stat.component.scss']
+  styleUrls: ['./pokemon-stat.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PokemonStatComponent implements AfterViewInit {
   @Input()
