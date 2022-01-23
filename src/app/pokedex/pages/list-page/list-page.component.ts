@@ -6,6 +6,7 @@ import { BaseDirective } from 'src/app/shared/directives/base.directive';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { Pokemon } from '../../models/Pokemon';
 import { PokemonCacheService } from '../../services/pokemon-cache.service';
+import { UserService } from '../../services/user.service';
 const ListPageLoadingKeys = {
   getPage: 'GET_PAGE'
 }
@@ -17,6 +18,7 @@ const ListPageLoadingKeys = {
 })
 export class ListPageComponent extends BaseDirective implements OnInit {
 
+  mode: 'pokedex' | 'wishlist' | 'caught' = 'pokedex';
   pokemonsPage: Array<Observable<Pokemon>> | null = null;
   /**
    * When true a page is loading, so I have to disable the paginator
@@ -30,6 +32,7 @@ export class ListPageComponent extends BaseDirective implements OnInit {
   searchValue: string;
 
   constructor(public pokemonCacheSvc: PokemonCacheService, 
+    public userSvc: UserService,
     private loadingSvc: LoadingService, 
     private toastrSvc: ToastrService,
     private router: Router
@@ -80,4 +83,12 @@ export class ListPageComponent extends BaseDirective implements OnInit {
         ).subscribe(x => this.pokemonsPage = x);
   }
 
+  addToWishlist(pokemonId: number){
+    console.log(pokemonId);
+    this.userSvc.isInWishlist(pokemonId) ? this.userSvc.removeWishlistPokemon(pokemonId) : this.userSvc.addWishlistPokemon(pokemonId);
+  }
+
+  addToCaught(pokemonId: number){
+    this.userSvc.isCaught(pokemonId) ? this.userSvc.removeCaughtPokemon(pokemonId) : this.userSvc.addCaughtPokemon(pokemonId);
+  }
 }

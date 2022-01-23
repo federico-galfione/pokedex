@@ -57,13 +57,49 @@
         @include respond-to("xx-large"){
             grid-template-columns: repeat(5, 1fr);
         }
-        padding: 32px 32px 80px 32px;
+        padding: 32px 32px 136px 32px;
         gap: 32px;
     }
     .footer{
         position: fixed;
+        background-color: white;
         width: 100%;
         bottom: 0;
         z-index: 100;
+        .change-mode-container{
+            display: flex;
+            width: calc(100% - 32px);
+            gap: 8px;
+            padding: 16px 16px 0 16px;
+            align-items: center;
+            justify-content: center;
+            &.padding-bottom{
+                padding-bottom: 16px;
+            }
+            div{
+                padding: 8px;
+                text-align: center;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 8px;
+                mat-icon{
+                    margin-right: 8px;
+                }
+                &.all{
+                    background-color: var(--grass-type-color);
+                }
+                &.caught{
+                    background-color: var(--main-app-color);
+                }
+                &.wishlist{
+                    background-color: var(--fighting-type-color);
+                }
+            }
+        }
     }
 }
