@@ -47,7 +47,6 @@ export class ListPageComponent extends BaseDirective implements OnInit {
    * @param nameOrNumber the name or id of the pokemon as string
    */
   goToDetail(nameOrNumber: string){
-    console.log('EHY!')
     this.loadingSvc
         .startLoading(
           this,

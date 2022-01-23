@@ -55,7 +55,6 @@ export class PokemonCacheService extends PokedexService {
           .pipe(
             tap(pokemon => {
               this.addPokemonToCache(pokemon)
-              console.log(Object.keys(this.pokemonCacheByName).length);
             })
           );
   }
