@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { PokeapiGenericPage } from '../models/PokeapiGenericPage';
 import { Pokemon } from '../models/Pokemon';
+const ELEMENTS_PER_PAGE = 20;
 
 /**
  * This is not a real Angular Service cause it's not provided,
@@ -13,20 +15,31 @@ import { Pokemon } from '../models/Pokemon';
 export class PokedexService {
 
   //The next page to be called
-  private nextPokemonPage: string | null = null;
+  private _infoPagination: { count: number, itemsPerPage: number } | null = null;
+  protected get infoPagination(){
+    return this._infoPagination;
+  }
+  private set infoPagination(value){
+    this._infoPagination = value;
+  }
   constructor(private http: HttpClient) { }
 
   /**
    * Get a paginated list of pokemon
    * 
+   * @param forward If true take the next page, if false the previous one
    * @returns Returns an observable of Pokemon
    */
-  protected getPokemonPageFromApi(){
-    return this.http.get<PokeapiGenericPage<Pokemon>>(this.nextPokemonPage ?? `api/pokemon`);
+  protected getPokemonPageFromApi(pageNumber: number){
+    console.log(environment.baseApiUrl);
+    return this.http.get<PokeapiGenericPage<Pokemon>>(`${environment.baseApiUrl}/pokemon?offset=${pageNumber * ELEMENTS_PER_PAGE}&limit=20`)
+      .pipe(tap(
+        result => this.infoPagination = { count: result.count, itemsPerPage: ELEMENTS_PER_PAGE }
+      ));
   }
 
   protected getPokemonFromApi(numberOrName: string){
-    return this.http.get<Pokemon>(`api/pokemon/${numberOrName}`)
+    return this.http.get<Pokemon>(`${environment.baseApiUrl}/pokemon/${numberOrName}`)
       .pipe(
         map(result => {
           return  {

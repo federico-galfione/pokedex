@@ -18,6 +18,9 @@ type NameOrNumber = {name: string, number?: never} | {name?: never, number: stri
 export class PokemonCacheService extends PokedexService {
   private pokemonCacheByName: {[key: string]: Pokemon} = {};
   private pokemonCacheById: {[key: number]: Pokemon} = {};
+  public get pagination(){
+    return super.infoPagination;
+  }
 
   constructor(httpClient: HttpClient) { 
     super(httpClient);
@@ -29,8 +32,8 @@ export class PokemonCacheService extends PokedexService {
    * 
    * @returns return a an observable of lists of observables of pokemon
    */
-  public getPokemonPage(): Observable<Array<Observable<Pokemon>>> {
-      return super.getPokemonPageFromApi().pipe(
+  public getPokemonPage(pageNumber: number = 0): Observable<Array<Observable<Pokemon>>> {
+      return super.getPokemonPageFromApi(pageNumber).pipe(
         map(page => page.results.map(info => this.getPokemon({ name: info.name })))
       )
   }
@@ -50,6 +53,7 @@ export class PokemonCacheService extends PokedexService {
           .pipe(
             tap(pokemon => {
               this.addPokemonToCache(pokemon)
+              console.log(Object.keys(this.pokemonCacheByName).length);
             })
           );
   }

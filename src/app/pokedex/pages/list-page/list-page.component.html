@@ -10,5 +10,10 @@
     </ng-container>
 </div>
 <div class="footer">
-    
+    <mat-paginator
+        [length]="pokemonCacheSvc.pagination?.count"
+        [pageSize]="pokemonCacheSvc.pagination?.itemsPerPage"
+        [disabled]="isLoadingPage$ | async"
+        (page)="loadPage($event.pageIndex)"
+    ></mat-paginator>
 </div>

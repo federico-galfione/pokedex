@@ -22,12 +22,17 @@
             width: auto;
         };
         .title-and-types{
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            padding: 16px;
             .name{
-                padding-top: 16px;
-                padding-right: 16px;
                 font-size: 24px;
                 font-weight: bold;
                 color: white;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 margin-bottom: 4px;
             }
             .types-container{
