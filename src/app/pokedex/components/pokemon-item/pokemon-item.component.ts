@@ -37,4 +37,8 @@ export class PokemonItemComponent implements OnChanges {
   pokemonClicked(){
     this.pokemonClick.emit(this.pokemon.id.toString());
   }
+
+  imgNotFound(){
+    this.pokemon.sprites.other['official-artwork'].front_default = '/assets/no-img-placeholder.png'
+  }
 }

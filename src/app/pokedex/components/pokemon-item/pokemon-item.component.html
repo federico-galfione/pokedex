@@ -1,5 +1,5 @@
 <div *ngIf="pokemon; else loading" [ngClass]="{ container: true, clickable: !!pokemon}" (click)="pokemonClicked()">
-    <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default">
+    <img class="pokemon-img" [src]="pokemon.sprites.other['official-artwork'].front_default" (error)="imgNotFound()">
     <div class="title-and-types">
         <div class="name">{{pokemon.name | titlecase}}</div>
         <div class="types-container">
