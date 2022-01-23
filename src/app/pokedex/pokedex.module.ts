@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
@@ -18,7 +20,9 @@ import { PokedexRoutingModule } from './pokedex-routing.module';
     CommonModule,
     PokedexRoutingModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule,
+    FormsModule
   ]
 })
 export class PokedexModule { }

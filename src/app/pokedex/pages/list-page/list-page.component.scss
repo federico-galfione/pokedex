@@ -4,10 +4,43 @@
     .headbar{
         padding: 8px 32px;
     }
-    input {
+    .search-container {
+        padding: 16px;
+        background: linear-gradient(45deg, var(--main-app-color-shade), var(--main-app-color-tint));
         position: fixed;
         right: 0;
-        top: 16px;
+        top: 0;
+        border-radius: 0px 0px 0px 16px;
+        z-index: 100;
+        .label{
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            mat-icon{
+                margin-right: 8px;
+            }
+        }
+        .search-form{
+            input{
+                border: 1px solid var(--main-app-color);
+                border-radius: 20px;
+                line-height: 28px;
+                width: calc(100% - 16px);
+                padding-left: 16px;
+            }
+            mat-icon{
+                cursor: pointer;
+                color: white;
+                margin-left: 16px;
+                position: absolute;
+                bottom: 20px;
+                background: var(--main-app-color);
+                right: 16px;
+                border-radius: 100%;
+            }
+        }
+
     }
     .content{
         display: grid;

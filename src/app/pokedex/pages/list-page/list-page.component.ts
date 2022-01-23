@@ -20,6 +20,12 @@ export class ListPageComponent extends BaseDirective implements OnInit {
    * When true a page is loading, so I have to disable the paginator
    */
   isLoadingPage$: Observable<boolean>;
+  /**
+   * The value in the search input.
+   * 
+   * P.S. I usually prefer Reactive Forms instead Template Driven, but with just one field it would be an overkill
+   */
+  searchValue: string;
 
   constructor(public pokemonCacheSvc: PokemonCacheService, private loadingSvc: LoadingService) { 
     super()
@@ -30,8 +36,19 @@ export class ListPageComponent extends BaseDirective implements OnInit {
   ngOnInit(): void {
   }
 
-  goToDetail(pokemon: Pokemon){
-    console.log(pokemon);
+  goToDetail(nameOrNumber: string){
+    this.loadingSvc
+        .startLoading(
+          this,
+          ListPageLoadingKeys.getPage,
+          this.pokemonCacheSvc.getPokemon(nameOrNumber),
+          {
+            message: 'I\'m looking for your Pokemon!',
+          }
+        ).subscribe({
+          next: response => console.log('Pokemon found!'),
+          error: err => console.error('Pokemon not found!')
+        })
   }
 
   loadPage(pageIndex: number = 0){  

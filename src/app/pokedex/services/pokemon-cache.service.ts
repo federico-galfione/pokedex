@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Pokemon } from '../models/Pokemon';
 import { PokedexService } from './pokedex.service';
-type NameOrNumber = {name: string, number?: never} | {name?: never, number: string};
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,7 @@ export class PokemonCacheService extends PokedexService {
    */
   public getPokemonPage(pageNumber: number = 0): Observable<Array<Observable<Pokemon>>> {
       return super.getPokemonPageFromApi(pageNumber).pipe(
-        map(page => page.results.map(info => this.getPokemon({ name: info.name })))
+        map(page => page.results.map(info => this.getPokemon(info.name)))
       )
   }
 
@@ -44,9 +43,10 @@ export class PokemonCacheService extends PokedexService {
    * @param nameOrNumber The name or the number of the pokemon
    * @returns an observable of a Pokemon
    */
-  public getPokemon(nameOrNumber: NameOrNumber): Observable<Pokemon>{
-    const rightCache = (nameOrNumber.name) ? this.pokemonCacheByName : this.pokemonCacheById;
-    const key = nameOrNumber.name ?? nameOrNumber.number;
+  public getPokemon(nameOrNumber: string): Observable<Pokemon>{
+    nameOrNumber = nameOrNumber.trim().toLowerCase();
+    const rightCache = isNaN(+nameOrNumber) ? this.pokemonCacheByName : this.pokemonCacheById;
+    const key = nameOrNumber;
     return rightCache[key] 
       ? of(rightCache[key]) 
       : this.getPokemonFromApi(key)

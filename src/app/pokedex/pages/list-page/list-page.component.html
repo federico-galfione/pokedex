@@ -1,12 +1,13 @@
 <div class="headbar">
     <h1>Pokedéx</h1>
     <div class="search-container">
-        <input/>
+        <div class="label"><mat-icon>search</mat-icon>Search by name or id</div>
+        <div class="search-form"><input type="text" [(ngModel)]="searchValue"/><mat-icon (click)="goToDetail(searchValue)">arrow_forward</mat-icon></div>
     </div>
 </div>
 <div class="content">
     <ng-container *ngFor="let pokemon of pokemonsPage">
-        <poke-pokemon-item [pokemon]="pokemon | async"></poke-pokemon-item>
+        <poke-pokemon-item [pokemon]="pokemon | async" ></poke-pokemon-item>
     </ng-container>
 </div>
 <div class="footer">
