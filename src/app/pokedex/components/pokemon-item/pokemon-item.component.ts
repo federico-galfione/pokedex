@@ -34,7 +34,6 @@ export class PokemonItemComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
       if(changes.pokemon){
-        console.log(changes.pokemon.currentValue)
         this.elementRef.nativeElement.style.setProperty('--main-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-tint`))
         this.elementRef.nativeElement.style.setProperty('--shade-color', getComputedStyle(document.documentElement).getPropertyValue(`--${this.pokemon?.types[0].type.name}-type-color-shade`))
       }

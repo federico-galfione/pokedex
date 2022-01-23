@@ -32,7 +32,6 @@ export class PokedexService {
    * @returns Returns an observable of Pokemon
    */
   protected getPokemonPageFromApi(pageNumber: number){
-    console.log(environment.baseApiUrl);
     return this.http.get<PokeapiGenericPage<Pokemon>>(`${environment.baseApiUrl}/pokemon?offset=${pageNumber * ELEMENTS_PER_PAGE}&limit=20/`)
       .pipe(tap(
         result => this.infoPagination = { count: result.count, itemsPerPage: ELEMENTS_PER_PAGE, currentPage: pageNumber }
