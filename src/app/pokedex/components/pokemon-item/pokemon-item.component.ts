@@ -15,14 +15,6 @@ export class PokemonItemComponent implements OnChanges {
   @Output()
   pokemonClick: EventEmitter<string> = new EventEmitter<string>()
 
-  get nationalNumber(){
-    let num = this.pokemon?.id.toString();
-    if(!num)
-      return "#000";
-    while (num.length < 3) num = "0" + num;
-    return '#' + num;
-  }
-
   constructor(private elementRef: ElementRef) { 
     
   }

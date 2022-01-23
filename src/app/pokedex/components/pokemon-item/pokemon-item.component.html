@@ -8,14 +8,12 @@
         </div>
     </div>
     <div class="national-number">
-        {{nationalNumber}}
+        {{pokemon?.id | nationalNum}}
     </div>
 </div>
 <ng-template #loading>
     <div class="container no-content">
         <mat-spinner diameter="50"></mat-spinner>
-        <div class="national-number">
-            {{nationalNumber}}
-        </div>
+        <div class="national-number">#000</div>
     </div>
 </ng-template>

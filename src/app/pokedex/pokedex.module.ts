@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared/shared.module';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonTypeComponent } from './components/pokemon-type-icon/pokemon-type.component';
 import { DetailPageComponent } from './pages/detail/detail-page.component';
@@ -24,7 +25,8 @@ import { PokedexRoutingModule } from './pokedex-routing.module';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class PokedexModule { }
