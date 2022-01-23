@@ -1,6 +1,30 @@
 :host{
     --main-color: var(--main-app-color);
-    --shade-color: var(--main-app-color-tint);;
+    --shade-color: var(--main-app-color-tint);
+    position: relative;
+    .action-buttons{
+        position: absolute;
+        display: flex;
+        gap: 4px;
+        color: white;
+        top: -4px;
+        right: -4px;
+        z-index: 50;
+        mat-icon {
+            &.wishlist-button{
+                background-color: var(--fighting-type-color);
+            }
+            &.caught-button{
+                background-color: var(--main-app-color);
+            }
+            &.not-included{
+                background-color: darkgray;
+            }
+            border-radius: 8px;
+            padding: 4px;
+            cursor: pointer;
+        }
+    }
     .container{
         background: radial-gradient(ellipse at top left, var(--shade-color), var(--main-color));
         position: relative;

@@ -1,10 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Pokemon } from '../../models/Pokemon';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'poke-pokemon-item',
   templateUrl: './pokemon-item.component.html',
-  styleUrls: ['./pokemon-item.component.scss']
+  styleUrls: ['./pokemon-item.component.scss'],
 })
 export class PokemonItemComponent implements OnChanges {
   @Input()
@@ -13,10 +14,22 @@ export class PokemonItemComponent implements OnChanges {
    * Emit the pokemon id as a string
    */
   @Output()
-  pokemonClick: EventEmitter<string> = new EventEmitter<string>()
+  pokemonClick: EventEmitter<number> = new EventEmitter<number>()
+  @Output()
+  addWishlistClick: EventEmitter<number> = new EventEmitter<number>()
+  @Output()
+  addCaughtClick: EventEmitter<number> = new EventEmitter<number>()
 
-  constructor(private elementRef: ElementRef) { 
+  constructor(private elementRef: ElementRef, private userSvc: UserService) { 
     
+  }
+
+  get isInWishlist(){
+    return this.userSvc.isInWishlist(this.pokemon.id);
+  }
+
+  get isCaught(){
+    return this.userSvc.isCaught(this.pokemon.id);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -27,7 +40,15 @@ export class PokemonItemComponent implements OnChanges {
   }
 
   pokemonClicked(){
-    this.pokemonClick.emit(this.pokemon.id.toString());
+    this.pokemonClick.emit(this.pokemon.id);
+  }
+
+  addWishlist(){
+    this.addWishlistClick.emit(this.pokemon.id);
+  }
+
+  addCaught(){
+    this.addCaughtClick.emit(this.pokemon.id);
   }
 
   imgNotFound(){
