@@ -91,6 +91,10 @@ export class ListPageComponent extends BaseDirective implements OnInit {
     this.userSvc.isCaught(pokemonId) ? this.userSvc.removeCaughtPokemon(pokemonId) : this.userSvc.addCaughtPokemon(pokemonId);
   }
 
+  /**
+   * Check if the key enter has been pressed
+   * @param event keydown event
+   */
   checkIfEnter(event){
     if(event.key === 'Enter') {
       this.goToDetail(this.searchValue);        

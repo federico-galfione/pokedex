@@ -17,6 +17,9 @@ const DetailPageLoadingKeys = {
 })
 export class DetailPageComponent extends BaseDirective implements OnInit {
   pokemon: Pokemon;
+  /**
+   * Show just the first 5 moves.
+   */
   get slicedMoves(): PokemonMoveResource[]{
     return this.pokemon?.moves.slice(0, 5).map(x => {
       x.move.name = x.move.name.split('-').join(' ');

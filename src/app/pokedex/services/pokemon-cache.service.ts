@@ -23,6 +23,9 @@ export class PokemonCacheService extends PokedexService {
   public wishlist$: Observable<Observable<Pokemon>[]>;
   public caughtList$: Observable<Observable<Pokemon>[]>;
 
+  /**
+   * Expose the pagination info in PokedexService
+   */
   public get pagination(){
     return super.infoPagination;
   }
